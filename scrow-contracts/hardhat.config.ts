@@ -13,6 +13,14 @@ const config: HardhatUserConfig = {
     deployer:{
       default:0,
       37337:0
+    },
+    arbiter:{
+      default:1,
+      37337:1
+    },
+    beneficiary:{
+      default:2,
+      37337:2
     }
   }
 };
