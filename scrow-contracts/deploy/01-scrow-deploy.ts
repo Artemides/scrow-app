@@ -22,6 +22,5 @@ const deployScrow = async (hre: HardhatRuntimeEnvironment) => {
         console.error(error);
     }
 };
-
 export default deployScrow;
 deployScrow.tags = ["deploy", "scrow"];
