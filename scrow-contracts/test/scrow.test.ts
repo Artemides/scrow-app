@@ -3,7 +3,6 @@ import { developmentChains } from "../hardhat-helper";
 import { Scrow } from "../typechain-types";
 import { assert, expect } from "chai";
 import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
-import { int } from "hardhat/internal/core/params/argumentTypes";
 
 !developmentChains.includes(network.name)
     ? describe.skip
