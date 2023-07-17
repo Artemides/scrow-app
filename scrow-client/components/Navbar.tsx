@@ -34,7 +34,7 @@ export const Navbar = () => {
   }, [status]);
 
   return (
-    <nav className="flex justify-around sticky top-0 py-2 bg-gray-900 text-gray-300">
+    <nav className="flex justify-around sticky top-0 py-2 text-gray-300 backdrop-blur-[2px]">
       <span className="text-xl font-semibold">ScrowApp</span>
       <>
         {isConnected && address ? (

@@ -73,6 +73,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-gray-800 text-foreground;
+    @apply bg-gradient-to-b from-[#414141] to-[#1C1919] text-foreground;
   }
 }

@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import { Navbar } from "./Navbar";
+import { addresses } from "../constants";
 
 type LayoutProps = PropsWithChildren & {
   className?: string;
