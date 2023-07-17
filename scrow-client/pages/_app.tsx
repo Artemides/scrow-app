@@ -4,6 +4,9 @@ import type { AppProps } from "next/app";
 import { goerli } from "viem/dist/types/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { Titillium_Web } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
+import { Layout } from "../components/Layout";
+
 const titillium_web = Titillium_Web({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
@@ -23,7 +26,11 @@ const config = createConfig({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={config}>
-      <Component {...pageProps} />
+      <SessionProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SessionProvider>
     </WagmiConfig>
   );
 }
