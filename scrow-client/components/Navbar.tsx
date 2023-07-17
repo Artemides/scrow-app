@@ -28,14 +28,14 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    if (status === "unauthenticated") {
+    if (status === "authenticated") {
       connect({ connector: new MetaMaskConnector() });
     }
-  }, []);
+  }, [status]);
 
   return (
-    <nav className="flex sticky top-0 bg-white">
-      <span>Scrow</span>
+    <nav className="flex justify-around sticky top-0 py-2 bg-gray-900 text-gray-300">
+      <span className="text-xl font-semibold">ScrowApp</span>
       <>
         {isConnected && address ? (
           <div className="flex items-center justify-between gap-2 px-2 rounded-full text-sm">
@@ -43,8 +43,13 @@ export const Navbar = () => {
             <PiPlugsConnectedBold size={24} className="text-green-500" />
           </div>
         ) : (
-          <Button onClick={connectWallet} disabled={isLoading}>
-            <RxReload />
+          <Button
+            className="flex gap-2 items-center bg-green-400 px-2 rounded-md text-gray-900"
+            onClick={connectWallet}
+            disabled={isLoading}
+          >
+            {isLoading && <RxReload className="animate-spin" />}
+            Connect
           </Button>
         )}
       </>

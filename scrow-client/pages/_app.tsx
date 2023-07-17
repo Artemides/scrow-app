@@ -1,7 +1,12 @@
-import { WagmiConfig, configureChains, createConfig, mainnet } from "wagmi";
+import {
+  WagmiConfig,
+  configureChains,
+  createConfig,
+  mainnet,
+  sepolia,
+} from "wagmi";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { goerli } from "viem/dist/types/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { Titillium_Web } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
@@ -13,7 +18,7 @@ const titillium_web = Titillium_Web({
 });
 
 const { publicClient, webSocketPublicClient } = configureChains(
-  [goerli, mainnet],
+  [sepolia, mainnet],
   [publicProvider()]
 );
 
@@ -27,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={config}>
       <SessionProvider>
-        <Layout>
+        <Layout className={titillium_web.className}>
           <Component {...pageProps} />
         </Layout>
       </SessionProvider>
