@@ -35,7 +35,7 @@ export const Navbar = () => {
 
   return (
     <nav className="flex justify-around sticky top-0 py-2 text-gray-300 backdrop-blur-[2px]">
-      <span className="text-xl font-semibold">ScrowApp</span>
+      <span className="text-xl font-semibold">EscrowApp</span>
       <>
         {isConnected && address ? (
           <div className="flex items-center justify-between gap-2 px-2 rounded-full text-sm">

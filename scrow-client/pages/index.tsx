@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import { Button } from "../@/components/ui/button";
+import { DeploySteps } from "../components/DeploySteps";
 
 const Home: NextPage = () => {
   return (
@@ -11,7 +13,17 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}></main>
+      <main className={styles.main}>
+        <div className=" flex flex-col justify-center">
+          <h1 className="text-6xl font-bold text-white text-center">
+            A reliable Escrow solution
+          </h1>
+          <span className="text-center text-2xl text-gray-300">
+            Your Trusted Gateway to Secure Transactions
+          </span>
+          <DeploySteps />
+        </div>
+      </main>
     </div>
   );
 };
