@@ -9,6 +9,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../@/components/ui/dialog";
+import Stepper from "./Stepper";
+import { Titillium_Web } from "next/font/google";
+
+const titillium_web = Titillium_Web({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
 
 export const DeploySteps = () => {
   return (
@@ -18,16 +25,11 @@ export const DeploySteps = () => {
           Get Started
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[500px] ">
+      <DialogContent className={"max-w-[500px] " + titillium_web.className}>
         <DialogHeader>
-          <DialogTitle>New Escrow Contract</DialogTitle>
+          <DialogTitle className="text-center">New Escrow Contract</DialogTitle>
         </DialogHeader>
-        <div>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto
-          dolorem perferendis libero dicta, sed, cum temporibus cumque,
-          blanditiis molestiae asperiores laudantium quo amet vel! Sit totam
-          tempora quis in incidunt.
-        </div>
+        <Stepper />
       </DialogContent>
     </Dialog>
   );

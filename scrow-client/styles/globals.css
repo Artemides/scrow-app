@@ -77,3 +77,29 @@
     @apply bg-gradient-to-b from-[#414141] to-[#1C1919] text-foreground;
   }
 }
+
+.step-item {
+  @apply relative flex flex-col justify-center items-center w-3/4;
+}
+
+.step-item:not(:first-child)::before {
+  @apply content-[''] absolute  w-full h-[2px] right-2/4 top-1/4 bg-gray-800;
+}
+.step {
+  @apply w-8 h-8 flex items-center justify-center z-10 relative bg-gray-800 rounded-full font-semibold text-white;
+}
+
+.active .step {
+  @apply bg-white text-gray-600;
+}
+
+.complete .step {
+  @apply bg-green-400;
+}
+.complete p {
+  @apply text-white font-semibold;
+}
+
+.complete:not(:first-child)::before {
+  @apply bg-green-400;
+}
