@@ -7,6 +7,8 @@ import Escrow from "../artifacts/contracts/Escrow.sol/Scrow.json";
 import { useChainId, useWaitForTransaction, useWalletClient } from "wagmi";
 import { Hex, TransactionReceipt, parseEther } from "viem";
 import { BiLoaderCircle } from "react-icons/bi";
+// import { hardhat } from "viem/dist/types/chains";
+import { hardhat } from "wagmi/chains";
 
 const steps = ["beneficer", "Price", "arbiter", "deploy"];
 type EscrowArgs = {
@@ -23,9 +25,9 @@ const Stepper = () => {
   const [transactionHash, setTransactionHash] = useState<
     `0x${string}` | undefined
   >();
-  const [transactionReceipt, setTransactionReceipt] = useState<
-    TransactionReceipt | undefined
-  >();
+  //   const [transactionReceipt, setTransactionReceipt] = useState<
+  //     TransactionReceipt | undefined
+  //   >();
   const [contractAddress, setContractAddress] = useState<string | null>();
   const [escrowArgs, setEscrowArgs] = useState<EscrowArgs>({
     arbiter: "",
@@ -37,11 +39,22 @@ const Stepper = () => {
     chainId,
     hash: transactionHash,
     onReplaced: ({ transactionReceipt }) => {
-      setTransactionReceipt(transactionReceipt);
       const escrowAddres = transactionReceipt.contractAddress;
       setContractAddress(escrowAddres);
     },
   });
+
+  useEffect(() => {
+    if (!walletClient) return;
+
+    const getData = async () => {
+      const chainId = walletClient.chain;
+
+      console.log({ chainId });
+    };
+
+    getData();
+  }, [walletClient]);
 
   const deployNewEscrowContract = async () => {
     const abi = Escrow.abi;
@@ -50,6 +63,7 @@ const Stepper = () => {
     if (!escrowArgsConfirmed()) return false;
 
     const hash = await walletClient.deployContract({
+      chain: hardhat,
       abi,
       bytecode,
       args: [escrowArgs.beneficiary, escrowArgs.arbiter],
@@ -152,9 +166,15 @@ const Stepper = () => {
 
       {currentStep === steps.length && (
         <div className="flex justify-center">
-          <Button className="w-max" onClick={deployNewEscrowContract}>
-            Deploy Contract
-          </Button>
+          {!isSuccess && (
+            <Button
+              disabled={isLoading}
+              className="w-max"
+              onClick={deployNewEscrowContract}
+            >
+              Deploy Contract
+            </Button>
+          )}
           {isLoading && <BiLoaderCircle size={42} className="animate-spin" />}
           {isError && (
             <p className="font-semibold text-red-400 text-center ">
@@ -163,7 +183,7 @@ const Stepper = () => {
           )}
           {isSuccess && (
             <p className="font-semibold text-green-400 text-center">
-              Your Contract has been deployed successfully
+              Your Contract has been deployed successfully at {contractAddress}
             </p>
           )}
         </div>

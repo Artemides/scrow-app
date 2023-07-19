@@ -7,7 +7,7 @@ import "hardhat-deploy";
 const config: HardhatUserConfig = {
     solidity: "0.8.18",
     networks: {
-        hardhat: { chainId: 37337 },
+        hardhat: { chainId: 31337 },
     },
 
     namedAccounts: {

@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Escrow.sol": {
+      "content": "// SPDX-License-Identifier: SEE LICENSE IN LICENSE\npragma solidity ^0.8.18;\n\ncontract Scrow {\n    address public s_beneficiary;\n    address public s_depositor;\n    address public s_arbiter;\n    bool public s_approved;\n\n    event EscrowApproved(uint256 amount);\n    error Escrow__OnlyArbiter();\n    error Escrow__TransferFundsFailed();\n    error Escrow__AlreadyApproved();\n\n    modifier onlyArbiter() {\n        if (msg.sender != s_arbiter) revert Escrow__OnlyArbiter();\n        _;\n    }\n\n    modifier notApproved() {\n        if (s_approved) revert Escrow__AlreadyApproved();\n        _;\n    }\n\n    constructor(address _beneficiary, address _arbiter) payable {\n        s_depositor = msg.sender;\n        s_beneficiary = _beneficiary;\n        s_arbiter = _arbiter;\n    }\n\n    function approve() external onlyArbiter notApproved {\n        uint256 balance = address(this).balance;\n        (bool success, ) = s_beneficiary.call{value: balance}(\"\");\n        if (!success) revert Escrow__TransferFundsFailed();\n\n        s_approved = true;\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

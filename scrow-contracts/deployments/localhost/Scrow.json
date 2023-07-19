@@ -1,0 +1,191 @@
+{
+  "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_arbiter",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "Escrow__AlreadyApproved",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Escrow__OnlyArbiter",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Escrow__TransferFundsFailed",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "EscrowApproved",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "approve",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "s_approved",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "s_arbiter",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "s_beneficiary",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "s_depositor",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xb170f95c01e173f2d99bf426e7a6c99f1be11c1860611a95488739c1cfc8e6c3",
+  "receipt": {
+    "to": null,
+    "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "contractAddress": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "transactionIndex": 0,
+    "gasUsed": "355108",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x1f89f279352345f03d1b855d8c403c437a2b3ed734a8e458c608cc97f55299e7",
+    "transactionHash": "0xb170f95c01e173f2d99bf426e7a6c99f1be11c1860611a95488739c1cfc8e6c3",
+    "logs": [],
+    "blockNumber": 1,
+    "cumulativeGasUsed": "355108",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+    "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "8bb4be639f45562170afa446f829404b",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.18+commit.87f61d96\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_beneficiary\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_arbiter\",\"type\":\"address\"}],\"stateMutability\":\"payable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"Escrow__AlreadyApproved\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Escrow__OnlyArbiter\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Escrow__TransferFundsFailed\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"EscrowApproved\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"approve\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"s_approved\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"s_arbiter\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"s_beneficiary\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"s_depositor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Escrow.sol\":\"Scrow\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Escrow.sol\":{\"content\":\"// SPDX-License-Identifier: SEE LICENSE IN LICENSE\\npragma solidity ^0.8.18;\\n\\ncontract Scrow {\\n    address public s_beneficiary;\\n    address public s_depositor;\\n    address public s_arbiter;\\n    bool public s_approved;\\n\\n    event EscrowApproved(uint256 amount);\\n    error Escrow__OnlyArbiter();\\n    error Escrow__TransferFundsFailed();\\n    error Escrow__AlreadyApproved();\\n\\n    modifier onlyArbiter() {\\n        if (msg.sender != s_arbiter) revert Escrow__OnlyArbiter();\\n        _;\\n    }\\n\\n    modifier notApproved() {\\n        if (s_approved) revert Escrow__AlreadyApproved();\\n        _;\\n    }\\n\\n    constructor(address _beneficiary, address _arbiter) payable {\\n        s_depositor = msg.sender;\\n        s_beneficiary = _beneficiary;\\n        s_arbiter = _arbiter;\\n    }\\n\\n    function approve() external onlyArbiter notApproved {\\n        uint256 balance = address(this).balance;\\n        (bool success, ) = s_beneficiary.call{value: balance}(\\\"\\\");\\n        if (!success) revert Escrow__TransferFundsFailed();\\n\\n        s_approved = true;\\n    }\\n}\\n\",\"keccak256\":\"0x0662d9d6d27ed03775d03b80228c3c04baf1b50711c863aefb873918e57e240e\",\"license\":\"SEE LICENSE IN LICENSE\"}},\"version\":1}",
+  "bytecode": "0x60806040526040516105c53803806105c583398181016040528101906100259190610151565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550816000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555080600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505050610191565b600080fd5b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b600061011e826100f3565b9050919050565b61012e81610113565b811461013957600080fd5b50565b60008151905061014b81610125565b92915050565b60008060408385031215610168576101676100ee565b5b60006101768582860161013c565b92505060206101878582860161013c565b9150509250929050565b610425806101a06000396000f3fe608060405234801561001057600080fd5b50600436106100575760003560e01c806312424e3f1461005c57806345341a4c14610066578063521840b0146100845780638dc09203146100a2578063bbfeb52c146100c0575b600080fd5b6100646100de565b005b61006e610294565b60405161007b9190610358565b60405180910390f35b61008c6102ba565b604051610099919061038e565b60405180910390f35b6100aa6102cd565b6040516100b79190610358565b60405180910390f35b6100c86102f1565b6040516100d59190610358565b60405180910390f35b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614610165576040517fada7855600000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b600260149054906101000a900460ff16156101ac576040517f8464a85400000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b600047905060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16826040516101f8906103da565b60006040518083038185875af1925050503d8060008114610235576040519150601f19603f3d011682016040523d82523d6000602084013e61023a565b606091505b5050905080610275576040517fdd0a759b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6001600260146101000a81548160ff0219169083151502179055505050565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600260149054906101000a900460ff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b600061034282610317565b9050919050565b61035281610337565b82525050565b600060208201905061036d6000830184610349565b92915050565b60008115159050919050565b61038881610373565b82525050565b60006020820190506103a3600083018461037f565b92915050565b600081905092915050565b50565b60006103c46000836103a9565b91506103cf826103b4565b600082019050919050565b60006103e5826103b7565b915081905091905056fea26469706673582212204cb3211af98ab0f7fc96c19b583337ea23730ada29426be07d43bd89f596ac6b64736f6c63430008120033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100575760003560e01c806312424e3f1461005c57806345341a4c14610066578063521840b0146100845780638dc09203146100a2578063bbfeb52c146100c0575b600080fd5b6100646100de565b005b61006e610294565b60405161007b9190610358565b60405180910390f35b61008c6102ba565b604051610099919061038e565b60405180910390f35b6100aa6102cd565b6040516100b79190610358565b60405180910390f35b6100c86102f1565b6040516100d59190610358565b60405180910390f35b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614610165576040517fada7855600000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b600260149054906101000a900460ff16156101ac576040517f8464a85400000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b600047905060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16826040516101f8906103da565b60006040518083038185875af1925050503d8060008114610235576040519150601f19603f3d011682016040523d82523d6000602084013e61023a565b606091505b5050905080610275576040517fdd0a759b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6001600260146101000a81548160ff0219169083151502179055505050565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600260149054906101000a900460ff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b600061034282610317565b9050919050565b61035281610337565b82525050565b600060208201905061036d6000830184610349565b92915050565b60008115159050919050565b61038881610373565b82525050565b60006020820190506103a3600083018461037f565b92915050565b600081905092915050565b50565b60006103c46000836103a9565b91506103cf826103b4565b600082019050919050565b60006103e5826103b7565b915081905091905056fea26469706673582212204cb3211af98ab0f7fc96c19b583337ea23730ada29426be07d43bd89f596ac6b64736f6c63430008120033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 3,
+        "contract": "contracts/Escrow.sol:Scrow",
+        "label": "s_beneficiary",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 5,
+        "contract": "contracts/Escrow.sol:Scrow",
+        "label": "s_depositor",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_address"
+      },
+      {
+        "astId": 7,
+        "contract": "contracts/Escrow.sol:Scrow",
+        "label": "s_arbiter",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_address"
+      },
+      {
+        "astId": 9,
+        "contract": "contracts/Escrow.sol:Scrow",
+        "label": "s_approved",
+        "offset": 20,
+        "slot": "2",
+        "type": "t_bool"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      }
+    }
+  }
+}
