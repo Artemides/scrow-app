@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button } from "../@/components/ui/button";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import { useStepper } from "../hooks/useStepper";
@@ -58,6 +58,24 @@ const Stepper = () => {
     const { name, value } = event.target;
     setEscrowArgs((prevArgs) => ({ ...prevArgs, [name]: value }));
   };
+
+  const isHash = (str: string) => {
+    if (!str.startsWith("0x") || str.length !== 42) return false;
+    return true;
+  };
+
+  const nextStepEnable = useMemo(() => {
+    if (currentStep === 1 && !isHash(escrowArgs.beneficiary)) return false;
+    if (currentStep === 2 && !(escrowArgs.price > 0)) return false;
+    if (currentStep === 3 && !isHash(escrowArgs.arbiter)) return false;
+
+    return true;
+  }, [
+    currentStep,
+    escrowArgs.arbiter,
+    escrowArgs.beneficiary,
+    escrowArgs.price,
+  ]);
 
   return (
     <>
@@ -132,7 +150,7 @@ const Stepper = () => {
           <GrFormPrevious size={21} />
         </Button>
         <Button
-          disabled={currentStep === steps.length}
+          disabled={currentStep === steps.length || !nextStepEnable}
           className="rounded-full p-0 w-8 h-8"
           onClick={onNextStep}
         >
