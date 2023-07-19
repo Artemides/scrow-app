@@ -31,7 +31,7 @@ export const Navbar = () => {
     if (status === "authenticated") {
       connect({ connector: new MetaMaskConnector() });
     }
-  }, [status]);
+  }, [connect, status]);
 
   return (
     <nav className="flex justify-around sticky top-0 py-2 text-gray-300 backdrop-blur-[2px]">

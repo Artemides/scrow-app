@@ -6,7 +6,8 @@ import { Input } from "../@/components/ui/input";
 import Escrow from "../artifacts/contracts/Escrow.sol/Scrow.json";
 import { useChainId, useWaitForTransaction, useWalletClient } from "wagmi";
 import { Hex, TransactionReceipt, parseEther } from "viem";
-import { BigNumber } from "moralis/common-core";
+import { BiLoaderCircle } from "react-icons/bi";
+
 const steps = ["beneficer", "Price", "arbiter", "deploy"];
 type EscrowArgs = {
   beneficiary: string;
@@ -32,7 +33,7 @@ const Stepper = () => {
     price: BigInt(0),
   });
 
-  useWaitForTransaction({
+  const { isLoading, isSuccess, isError } = useWaitForTransaction({
     chainId,
     hash: transactionHash,
     onReplaced: ({ transactionReceipt }) => {
@@ -46,17 +47,31 @@ const Stepper = () => {
     const abi = Escrow.abi;
     const bytecode = Escrow.bytecode as Hex;
     if (!walletClient) return;
+    if (!escrowArgsConfirmed()) return false;
+
     const hash = await walletClient.deployContract({
       abi,
       bytecode,
-      args: [],
+      args: [escrowArgs.beneficiary, escrowArgs.arbiter],
+      value: escrowArgs.price,
     });
     setTransactionHash(hash);
   };
 
+  const escrowArgsConfirmed = () => {
+    if (!isHash(escrowArgs.beneficiary)) return false;
+    if (!(escrowArgs.price > 0)) return false;
+    if (!isHash(escrowArgs.arbiter)) return false;
+
+    return true;
+  };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setEscrowArgs((prevArgs) => ({ ...prevArgs, [name]: value }));
+    setEscrowArgs((prevArgs) => ({
+      ...prevArgs,
+      [name]: name === "price" ? parseEther(value) : value,
+    }));
   };
 
   const isHash = (str: string) => {
@@ -137,7 +152,20 @@ const Stepper = () => {
 
       {currentStep === steps.length && (
         <div className="flex justify-center">
-          <Button className="w-max">Deploy Contract</Button>
+          <Button className="w-max" onClick={deployNewEscrowContract}>
+            Deploy Contract
+          </Button>
+          {isLoading && <BiLoaderCircle size={42} className="animate-spin" />}
+          {isError && (
+            <p className="font-semibold text-red-400 text-center ">
+              Error deploying this contract
+            </p>
+          )}
+          {isSuccess && (
+            <p className="font-semibold text-green-400 text-center">
+              Your Contract has been deployed successfully
+            </p>
+          )}
         </div>
       )}
 
