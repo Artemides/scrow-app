@@ -110,9 +110,9 @@ const Stepper = () => {
         {steps.map((step, idx) => (
           <div
             key={idx}
-            className={`step-item ${currentStep === idx + 1 && "active"} ${
-              idx + 1 < currentStep && "complete"
-            }`}
+            className={`step-item ${
+              currentStep === idx + 1 && !isSuccess && "active"
+            } ${(idx + 1 < currentStep || isSuccess) && "complete"}`}
           >
             <div className="step">{idx + 1}</div>
             <p className="text-gray-300 capitalize">{step}</p>
@@ -202,7 +202,7 @@ const Stepper = () => {
 
       <div className="flex justify-center gap-2 items-center">
         <Button
-          disabled={currentStep === 1}
+          disabled={currentStep === 1 || isSuccess}
           className="rounded-full p-0 w-8 h-8"
           onClick={onPrevStep}
         >
