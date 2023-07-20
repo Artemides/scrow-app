@@ -1,19 +1,12 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Button } from "../@/components/ui/button";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import { useStepper } from "../hooks/useStepper";
 import { Input } from "../@/components/ui/input";
 import Escrow from "../artifacts/contracts/Escrow.sol/Scrow.json";
-import { useNetwork, useWaitForTransaction, useWalletClient } from "wagmi";
-import {
-  Hex,
-  TransactionReceipt,
-  createPublicClient,
-  formatEther,
-  http,
-  parseEther,
-} from "viem";
-import { BiLoaderCircle } from "react-icons/bi";
+import { useWaitForTransaction, useWalletClient } from "wagmi";
+import { Hex, formatEther, parseEther } from "viem";
+import { BiLoaderCircle, BiSolidCopy, BiSolidCopyAlt } from "react-icons/bi";
 import { hardhat } from "wagmi/chains";
 
 const steps = ["beneficer", "Price", "arbiter", "deploy"];
@@ -34,6 +27,8 @@ const Stepper = () => {
     beneficiary: "",
     price: BigInt(0),
   });
+  const [addressCopied, setAddressCopied] = useState<boolean>(false);
+  const contractAddrsRef = useRef<HTMLSpanElement | null>(null);
 
   const {
     isError,
@@ -93,6 +88,21 @@ const Stepper = () => {
     escrowArgs.beneficiary,
     escrowArgs.price,
   ]);
+
+  const onCopyAddress = () => {
+    if (!contractAddrsRef.current) return;
+
+    const range = document.createRange();
+    range.selectNode(contractAddrsRef.current);
+    window.getSelection()?.removeAllRanges();
+    window.getSelection()?.addRange(range);
+    document.execCommand("copy");
+    window.getSelection()?.removeAllRanges();
+    setAddressCopied(true);
+    setTimeout(() => {
+      setAddressCopied(false);
+    }, 2000);
+  };
 
   return (
     <>
@@ -154,7 +164,7 @@ const Stepper = () => {
       )}
 
       {currentStep === steps.length && (
-        <div className="flex justify-center">
+        <div className="flex flex-col justify-center items-center">
           {!isSuccess && (
             <Button
               disabled={isLoading}
@@ -173,8 +183,19 @@ const Stepper = () => {
           {isSuccess && (
             <p className="font-semibold text-green-400 text-center">
               Your Contract has been deployed successfully at
-              {txReceipt?.contractAddress}
+              <br />
+              <span ref={contractAddrsRef} onClick={onCopyAddress}>
+                <BiSolidCopyAlt
+                  onClick={onCopyAddress}
+                  size={24}
+                  className="inline-block hover:cursor-pointer hover:bg-green-400/40 rounded-full p-[4px] mr-[2px]"
+                />
+                {txReceipt?.contractAddress}
+              </span>
             </p>
+          )}
+          {addressCopied && (
+            <p className="font-thin text-sm text-green-500 ">Address copied!</p>
           )}
         </div>
       )}
