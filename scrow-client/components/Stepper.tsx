@@ -5,11 +5,10 @@ import { useStepper } from "../hooks/useStepper";
 import { Input } from "../@/components/ui/input";
 import Escrow from "../artifacts/contracts/Escrow.sol/Scrow.json";
 import { useChainId, useWaitForTransaction, useWalletClient } from "wagmi";
-import { Hex, TransactionReceipt, parseEther } from "viem";
+import { Hex, formatEther, parseEther } from "viem";
+import { waitForTransaction } from "wagmi/actions";
 import { BiLoaderCircle } from "react-icons/bi";
-// import { hardhat } from "viem/dist/types/chains";
 import { hardhat } from "wagmi/chains";
-
 const steps = ["beneficer", "Price", "arbiter", "deploy"];
 type EscrowArgs = {
   beneficiary: string;
@@ -35,26 +34,20 @@ const Stepper = () => {
     price: BigInt(0),
   });
 
-  const { isLoading, isSuccess, isError } = useWaitForTransaction({
+  const { isError, isLoading, isSuccess } = useWaitForTransaction({
     chainId,
     hash: transactionHash,
+    confirmations: 2,
     onReplaced: ({ transactionReceipt }) => {
+      console.log("Waiting for transaction");
+      console.log({ transactionReceipt });
       const escrowAddres = transactionReceipt.contractAddress;
       setContractAddress(escrowAddres);
     },
+    onSuccess: ({ contractAddress }) => {
+      console.log({ contractAddress });
+    },
   });
-
-  useEffect(() => {
-    if (!walletClient) return;
-
-    const getData = async () => {
-      const chainId = walletClient.chain;
-
-      console.log({ chainId });
-    };
-
-    getData();
-  }, [walletClient]);
 
   const deployNewEscrowContract = async () => {
     const abi = Escrow.abi;
@@ -144,6 +137,7 @@ const Stepper = () => {
             className=" focus-visible:ring-offset-0 focus-visible:ring-1 focus-visible:ring-neutral-500 bg-neutral-800"
             type="number"
             placeholder="ETH"
+            value={formatEther(escrowArgs.price)}
             onChange={handleChange}
           />
         </div>

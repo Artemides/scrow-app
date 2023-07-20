@@ -21,7 +21,7 @@ export const DeploySteps = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="mt-16 py-4 px-16 text-[#02C845] bg-white self-center text-xl font-bold hover:bg-white/90">
+        <Button className="mt-16 py-8 px-16 text-[#02C845] bg-white self-center text-xl font-bold hover:bg-white/90">
           Get Started
         </Button>
       </DialogTrigger>
