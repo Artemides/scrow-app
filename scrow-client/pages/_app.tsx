@@ -12,6 +12,7 @@ import { Titillium_Web } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import { Layout } from "../components/Layout";
 import { ThemeProvider } from "next-themes";
+import { hardhat } from "wagmi/chains";
 
 const titillium_web = Titillium_Web({
   subsets: ["latin"],
@@ -19,7 +20,7 @@ const titillium_web = Titillium_Web({
 });
 
 const { publicClient, webSocketPublicClient } = configureChains(
-  [sepolia, mainnet],
+  [sepolia, mainnet, hardhat],
   [publicProvider()]
 );
 

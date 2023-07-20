@@ -4,11 +4,18 @@ import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import { useStepper } from "../hooks/useStepper";
 import { Input } from "../@/components/ui/input";
 import Escrow from "../artifacts/contracts/Escrow.sol/Scrow.json";
-import { useChainId, useWaitForTransaction, useWalletClient } from "wagmi";
-import { Hex, formatEther, parseEther } from "viem";
-import { waitForTransaction } from "wagmi/actions";
+import { useNetwork, useWaitForTransaction, useWalletClient } from "wagmi";
+import {
+  Hex,
+  TransactionReceipt,
+  createPublicClient,
+  formatEther,
+  http,
+  parseEther,
+} from "viem";
 import { BiLoaderCircle } from "react-icons/bi";
 import { hardhat } from "wagmi/chains";
+
 const steps = ["beneficer", "Price", "arbiter", "deploy"];
 type EscrowArgs = {
   beneficiary: string;
@@ -17,36 +24,24 @@ type EscrowArgs = {
 };
 
 const Stepper = () => {
-  const chainId = useChainId();
-
   const { currentStep, onNextStep, onPrevStep } = useStepper(steps);
   const { data: walletClient } = useWalletClient();
   const [transactionHash, setTransactionHash] = useState<
     `0x${string}` | undefined
   >();
-  //   const [transactionReceipt, setTransactionReceipt] = useState<
-  //     TransactionReceipt | undefined
-  //   >();
-  const [contractAddress, setContractAddress] = useState<string | null>();
   const [escrowArgs, setEscrowArgs] = useState<EscrowArgs>({
     arbiter: "",
     beneficiary: "",
     price: BigInt(0),
   });
 
-  const { isError, isLoading, isSuccess } = useWaitForTransaction({
-    chainId,
+  const {
+    isError,
+    isLoading,
+    isSuccess,
+    data: txReceipt,
+  } = useWaitForTransaction({
     hash: transactionHash,
-    confirmations: 2,
-    onReplaced: ({ transactionReceipt }) => {
-      console.log("Waiting for transaction");
-      console.log({ transactionReceipt });
-      const escrowAddres = transactionReceipt.contractAddress;
-      setContractAddress(escrowAddres);
-    },
-    onSuccess: ({ contractAddress }) => {
-      console.log({ contractAddress });
-    },
   });
 
   const deployNewEscrowContract = async () => {
@@ -177,7 +172,8 @@ const Stepper = () => {
           )}
           {isSuccess && (
             <p className="font-semibold text-green-400 text-center">
-              Your Contract has been deployed successfully at {contractAddress}
+              Your Contract has been deployed successfully at
+              {txReceipt?.contractAddress}
             </p>
           )}
         </div>
